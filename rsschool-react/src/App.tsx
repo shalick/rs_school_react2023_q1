@@ -1,14 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import NotFound from './pages/NotFound'
-import About from './pages/NotFound'
+import Main from './components/pages/Main'
+import NotFound from './components/pages/NotFound'
+import About from './components/pages/NotFound'
 
 function App() {
     return (
         <div>
             <Routes>
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Main />} />
                 <Route path="about" element={<About />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>

@@ -1,0 +1,7 @@
+.moviesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    text-align: center;
+    min-height: 65vh;
+}
