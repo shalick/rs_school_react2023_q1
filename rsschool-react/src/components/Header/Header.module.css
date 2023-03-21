@@ -1,0 +1,29 @@
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.headerContainer {
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0 auto 0 0;
+    fill: var(--text-color);
+}
+
+.logoPic {
+    height: 20px;
+    width: 30px;
+}
+
+.logo:hover {
+    fill: var(--hover-color);
+    color: var(--hover-color);
+}
