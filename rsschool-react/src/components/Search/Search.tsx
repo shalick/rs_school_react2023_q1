@@ -4,14 +4,14 @@ import { EmptyProps } from '../../utils/types'
 import classes from './Search.module.css'
 
 export class Search extends Component {
-    readonly state: { searchWord: string }
+    readonly state: { searchStr: string }
     constructor(props: EmptyProps) {
         super(props)
-        this.state = { searchWord: localStorage.getItem('searchString') || '' }
+        this.state = { searchStr: localStorage.getItem('searchString') || '' }
     }
 
     componentWillUnmount = () => {
-        localStorage.setItem('searchString', this.state.searchWord)
+        localStorage.setItem('searchStr', this.state.searchStr)
     }
 
     handleChangeInput = ({
@@ -19,8 +19,8 @@ export class Search extends Component {
     }: {
         target: { value: string }
     }) => {
-        this.setState((prev) => ({ ...prev, searchWord: value }))
-        console.log(this.state.searchWord)
+        this.setState((prev) => ({ ...prev, searchStr: value }))
+        console.log(this.state.searchStr)
     }
 
     render = () => (
@@ -30,8 +30,8 @@ export class Search extends Component {
                 id="search"
                 className={classes.search}
                 placeholder="Search movie"
-                autoFocus
-                value={this.state.searchWord || ''}
+                // autoFocus
+                value={this.state.searchStr || ''}
                 onChange={this.handleChangeInput}
             />
             <label htmlFor="search" className={classes.searchLabel}>
