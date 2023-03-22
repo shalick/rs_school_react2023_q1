@@ -11,5 +11,3 @@ export interface IMovieCard {
     actors: string[]
     storyline: string
 }
-
-export type EmptyProps = Record<string, never>

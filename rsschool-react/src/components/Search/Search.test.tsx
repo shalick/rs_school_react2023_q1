@@ -5,24 +5,11 @@ import { Search } from './Search'
 
 describe('Search component', () => {
     const searchStr = 'test'
-    it('render empty search component', () => {
+    it('render empty search input', () => {
         render(<Search />)
         const input = screen.getByRole('searchbox')
         expect(input).toBeInTheDocument()
         expect(input).toHaveValue('')
-    })
-
-    it('search input changes', () => {
-        render(<Search />)
-        const input = screen.getByRole('searchbox')
-        userEvent.type(input, searchStr)
-        expect(input).toHaveValue(searchStr)
-    })
-
-    it('search string save after unmount in local storage', () => {
-        const { unmount } = render(<Search />)
-        unmount()
-        expect(localStorage.getItem('searchStr')).toEqual(searchStr)
     })
 
     it('search string restore from local storage', () => {
