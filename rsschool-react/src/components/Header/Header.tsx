@@ -29,7 +29,8 @@ export class Header extends Component<HeaderProps> {
                             </svg>
                             <span>Movie App</span>
                         </Link>
-                        <h2>{this.props.pageTitle}</h2>
+                        <h2 role="page-title">{this.props.pageTitle}</h2>
+                        {/* <h2>{this.props.pageTitle}</h2> */}
                     </div>
 
                     <NavBar />

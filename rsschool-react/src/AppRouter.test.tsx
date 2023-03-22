@@ -1,17 +1,17 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { MemoryRouter, Route, Routes } from 'react-router-dom'
+import { MemoryRouter, Route, Routes, BrowserRouter } from 'react-router-dom'
 import React from 'react'
 import NotFound from '../src/components/pages/NotFound'
 import App from './App'
 
 describe('Routing', () => {
-    it('full app rendering/navigating', () => {
+    it('full app rendering/navigating', async () => {
         render(<App />)
         expect(screen.getByRole('searchbox')).toBeInTheDocument()
-        userEvent.click(screen.getByText(/about/i))
-        expect(screen.getByText(/About/i)).toBeInTheDocument()
-        userEvent.click(screen.getByText(/main/i))
+        await userEvent.click(screen.getByText(/about/i))
+        expect(screen.getByRole('page-title')).toHaveTextContent('About')
+        await userEvent.click(screen.getByText(/Main/))
         expect(screen.getByRole('searchbox')).toBeInTheDocument()
     })
 

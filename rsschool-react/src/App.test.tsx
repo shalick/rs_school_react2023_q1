@@ -16,11 +16,11 @@ import App from './App'
 // })
 
 describe('App', () => {
-    it('app renders', () => {
+    it('app renders', async () => {
         render(<App />)
         expect(screen.getByRole('searchbox')).toBeInTheDocument()
         expect(screen.getByRole('list')).toBeInTheDocument()
-        expect(screen.getByText(/main/i)).toBeInTheDocument()
+        expect(screen.getByRole('page-title')).toBeInTheDocument()
         expect(screen.getByText(/about/i)).toBeInTheDocument()
     })
 })

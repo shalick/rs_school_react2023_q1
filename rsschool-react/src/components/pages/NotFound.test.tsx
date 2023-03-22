@@ -1,10 +1,15 @@
+import React from 'react'
 import { render, screen } from '@testing-library/react'
 import NotFound from './NotFound'
+import { BrowserRouter } from 'react-router-dom'
 
 describe('Not found page', () => {
     it('renders 404 page', () => {
-        // eslint-disable-next-line react/react-in-jsx-scope
-        render(<NotFound />)
-        expect(screen.getByText(/404 error/i)).toBeInTheDocument()
+        render(
+            <BrowserRouter>
+                <NotFound />
+            </BrowserRouter>
+        )
+        expect(screen.getByText(/404 Error/i)).toBeInTheDocument()
     })
 })
