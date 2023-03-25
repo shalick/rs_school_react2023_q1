@@ -1,0 +1,19 @@
+.headerNav {
+    padding: 0.5em;
+    display: flex;
+}
+
+.headerLink {
+    padding: 0.5em;
+    font-size: 1.2em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.headerLink:hover {
+    opacity: 0.8;
+}
+
+.activeLink {
+    color: #b13849;
+}
