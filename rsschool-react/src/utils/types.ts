@@ -12,6 +12,16 @@ export interface IMovieCard {
     storyline: string
 }
 
+export interface IFormCard {
+    index: number
+    poster: string | null
+    title: string
+    date: string
+    category: string
+    streaming: string
+    watched: boolean
+}
+
 export interface INewCardFormState {
     errors: INewCardFormErrors
     cardIsSaved: boolean

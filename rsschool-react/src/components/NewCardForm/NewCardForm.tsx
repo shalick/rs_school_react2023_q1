@@ -9,7 +9,7 @@ import StreamingSwitcher from '../forms/StreamingSwitcher'
 import WatchedCheckbox from '../forms/WatchedCheckbox'
 import PosterUpload from '../forms/PosterUpload'
 import SubmitButton from '../forms/SubmitButton'
-import classes from './NewCard.module.css'
+import classes from './NewCardForm.module.css'
 
 export interface INewCardFormProps {
     setFormState: (state: IFormData) => void
@@ -19,7 +19,7 @@ export interface INewCardFormState {
     isButtonDisabled: boolean
 }
 
-class NewCard extends Component<INewCardFormProps, INewCardFormState> {
+class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
     formRef: INewCardFormRef
 
     constructor(props: INewCardFormProps) {
@@ -29,7 +29,7 @@ class NewCard extends Component<INewCardFormProps, INewCardFormState> {
         // this.errReset = this.errReset.bind(this)
         this.state = {
             // errorsArr: [],
-            isButtonDisabled: true,
+            isButtonDisabled: false,
             // isModalActive: false,
         }
         this.formRef = {
@@ -101,4 +101,4 @@ class NewCard extends Component<INewCardFormProps, INewCardFormState> {
     }
 }
 
-export default NewCard
+export default NewCardForm

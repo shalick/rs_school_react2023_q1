@@ -22,6 +22,14 @@ export class NavBar extends Component {
             >
                 About
             </NavLink>
+            <NavLink
+                className={({ isActive }) =>
+                    `headerLink ${isActive ? 'activeLink' : ''}`
+                }
+                to="Form"
+            >
+                Form
+            </NavLink>
         </nav>
     )
 }

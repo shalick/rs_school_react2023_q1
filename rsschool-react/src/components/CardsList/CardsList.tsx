@@ -2,7 +2,7 @@ import React from 'react'
 import { Component } from 'react'
 import { IMovieCard } from '../../utils/types'
 import { MovieCard } from '../MovieCard/MovieCard'
-import NewCard from '../NewCard/NewCard'
+import NewCard from '../NewCardForm/NewCardForm'
 import classes from './CardsList.module.css'
 
 interface IProps {
@@ -18,7 +18,6 @@ export class CardsList extends Component<IProps> {
 
     render = () => (
         <>
-            <NewCard />
             <ul className={classes.moviesContainer}>
                 {this.state.cards.map(
                     ({

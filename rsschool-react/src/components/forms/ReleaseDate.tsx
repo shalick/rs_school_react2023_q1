@@ -15,7 +15,7 @@ export default class ReleaseDate extends Component<IReleaseDateInputProps> {
                     name="date"
                     type="date"
                     ref={forwardRef}
-                    data-testId="date-input"
+                    data-testid="date-input"
                 />
             </label>
         )
