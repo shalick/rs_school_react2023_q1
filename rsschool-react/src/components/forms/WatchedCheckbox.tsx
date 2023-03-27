@@ -1,22 +1,26 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Component } from 'react'
-import { INewCardFormInputProps } from '../../utils/types'
 
-export default class WatchedCheckbox extends Component<INewCardFormInputProps> {
-    handleInput = () => this.props.setError('watched')
+export interface IWatchedCheckboxProps {
+    forwardRef: React.RefObject<HTMLInputElement>
+}
 
-    render = () => (
-        <>
+export default class WatchedCheckbox extends Component<
+    IWatchedCheckboxProps,
+    Record<string, never>
+> {
+    render() {
+        const { forwardRef } = this.props
+        return (
             <label>
                 Watched this movie.
                 <input
                     name="watched"
                     type="checkbox"
-                    onInput={this.handleInput}
+                    ref={forwardRef}
+                    data-testid="watched-checkbox"
                 />
-                <span></span>
             </label>
-            <span>{this.props.message}</span>
-        </>
-    )
+        )
+    }
 }

@@ -1,15 +1,23 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Component } from 'react'
-import { INewCardFormInputProps } from '../../utils/types'
 
-export default class ReleaseDate extends Component<INewCardFormInputProps> {
-    handleInput = () => this.props.setError('date')
+export interface IReleaseDateInputProps {
+    forwardRef: React.RefObject<HTMLInputElement>
+}
 
-    render = () => (
-        <label>
-            Release date
-            <input name="date" type="date" onInput={this.handleInput} />
-            <span>{this.props.message}</span>
-        </label>
-    )
+export default class ReleaseDate extends Component<IReleaseDateInputProps> {
+    render() {
+        const { forwardRef } = this.props
+        return (
+            <label>
+                Release date
+                <input
+                    name="date"
+                    type="date"
+                    ref={forwardRef}
+                    data-testId="date-input"
+                />
+            </label>
+        )
+    }
 }

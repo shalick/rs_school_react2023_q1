@@ -18,17 +18,29 @@ export interface INewCardFormState {
     submitIsDisabled: boolean
 }
 
-export interface INewCardValidationValues {
-    movieTitle: string
+export interface IFormData {
+    title: string
     date: string
     category: string
     streaming: string
     watched: boolean
-    image: File | null
+    poster: string | null
 }
 
 export interface INewCardFormErrors {
     [x: string]: string | undefined
+}
+
+// export interface INewCardFormProps {}
+
+export interface INewCardFormRef {
+    common: React.RefObject<HTMLFormElement>
+    title: React.RefObject<HTMLInputElement>
+    date: React.RefObject<HTMLInputElement>
+    category: React.RefObject<HTMLSelectElement>
+    streaming: React.RefObject<HTMLInputElement>
+    watched: React.RefObject<HTMLInputElement>
+    poster: React.RefObject<HTMLInputElement>
 }
 
 export interface INewCardFormInputProps {

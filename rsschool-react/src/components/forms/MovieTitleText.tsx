@@ -1,15 +1,21 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Component } from 'react'
-import { INewCardFormInputProps } from '../../utils/types'
 
-export default class MovieTitleText extends Component<INewCardFormInputProps> {
-    handleInput = () => this.props.setError('movieTitle')
+export interface IMovieTitleInputProps {
+    forwardRef: React.RefObject<HTMLInputElement>
+}
 
-    render = () => (
-        <label>
-            Movie Title
-            <input name="movieTitle" type="text" onInput={this.handleInput} />
-            <span>{this.props.message}</span>
-        </label>
-    )
+export default class MovieTitleText extends Component<
+    IMovieTitleInputProps,
+    Record<string, never>
+> {
+    render() {
+        const { forwardRef } = this.props
+        return (
+            <label>
+                Movie Title
+                <input name="movieTitle" type="text" ref={forwardRef} />
+            </label>
+        )
+    }
 }

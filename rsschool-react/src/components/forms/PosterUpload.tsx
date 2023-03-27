@@ -1,22 +1,27 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { Component } from 'react'
-import { INewCardFormInputProps } from '../../utils/types'
 
-export default class PosterUpload extends Component<INewCardFormInputProps> {
-    handleInput = () => this.props.setError('image')
+export interface IPosterUploadProps {
+    forwardRef: React.RefObject<HTMLInputElement>
+}
 
-    render = () => (
-        <>
+export default class PosterUpload extends Component<
+    IPosterUploadProps,
+    Record<string, never>
+> {
+    render() {
+        const { forwardRef } = this.props
+        return (
             <label>
-                Upload image
+                Upload poster
                 <input
                     name="file"
                     type="file"
+                    ref={forwardRef}
                     accept="image/*"
-                    onInput={this.handleInput}
+                    data-testid="file-input"
                 />
             </label>
-            <span>{this.props.message}</span>
-        </>
-    )
+        )
+    }
 }
