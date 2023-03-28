@@ -34,12 +34,8 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
     constructor(props: INewCardFormProps) {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
-        // this.toggleModalActive = this.toggleModalActive.bind(this)
-        // this.errReset = this.errReset.bind(this)
         this.state = {
-            // errorsArr: [],
             isButtonDisabled: false,
-            // isModalActive: false,
         }
         this.formRef = {
             common: createRef(),
@@ -90,8 +86,6 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
 
     render() {
         const { isButtonDisabled } = this.state
-        // const { onClose } = this.props
-        // const onClose = this.props.onClose
         const { title, date, category, streaming, watched, poster } =
             this.formRef
         return (
@@ -107,10 +101,7 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
                 <StreamingSwitcher forwardRef={streaming} />
                 <WatchedCheckbox forwardRef={watched} />
                 <PosterUpload forwardRef={poster} />
-                <SubmitButton
-                    isButtonDisabled={isButtonDisabled}
-                    // onClose={onClose}
-                />
+                <SubmitButton isButtonDisabled={isButtonDisabled} />
             </form>
         )
     }

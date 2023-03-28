@@ -1,6 +1,4 @@
-/* eslint-disable no-unreachable */
 import React from 'react'
-import { ReactNode } from 'react'
 import classes from './Modal.module.css'
 
 interface IModalProps {

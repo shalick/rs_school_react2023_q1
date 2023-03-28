@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import ReleaseDate from './ReleaseDate'
 
 describe('Release date input', () => {
@@ -16,11 +15,4 @@ describe('Release date input', () => {
         setup()
         expect(input).toBeInTheDocument()
     })
-
-    // it('should select date', () => {
-    //     setup()
-    //     expect(input).toContainHTML('')
-    //     userEvent.type(input, '2022-09-09')
-    //     expect(input.value).toBe('2022-09-09')
-    // })
 })

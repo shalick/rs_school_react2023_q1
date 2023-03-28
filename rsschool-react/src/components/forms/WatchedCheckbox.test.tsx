@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import WatchedCheckbox from './WatchedCheckbox'
 
 describe('Watched checkbox', () => {
@@ -16,11 +15,4 @@ describe('Watched checkbox', () => {
         setup()
         expect(checkbox).toBeInTheDocument()
     })
-
-    // it('should switch checked status', () => {
-    //     setup()
-    //     expect(checkbox.checked).toEqual(false)
-    //     userEvent.click(checkbox)
-    //     expect(checkbox.checked).toEqual(true)
-    // })
 })

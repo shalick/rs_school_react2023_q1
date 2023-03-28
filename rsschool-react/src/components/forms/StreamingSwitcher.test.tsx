@@ -1,6 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import StreamingSwitcher from './StreamingSwitcher'
 
 describe('Time checkbox', () => {
@@ -20,11 +19,4 @@ describe('Time checkbox', () => {
         expect(radio[0]).toBeInTheDocument()
         expect(radio[1]).toBeInTheDocument()
     })
-
-    // it('should switch checked status', () => {
-    //     setup()
-    //     expect(radio.checked).toEqual(false)
-    //     userEvent.click(customCheckbox)
-    //     expect(radio.checked).toEqual(true)
-    // })
 })

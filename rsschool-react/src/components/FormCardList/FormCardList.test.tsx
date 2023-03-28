@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen, within } from '@testing-library/react'
 import FormCardList from './FormCardList'
-// import { mockValidForm } from '../../tests/mockForm'
 import { IFormData } from '../../utils/types'
 
 export const mockValidForm = () => {
