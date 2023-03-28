@@ -22,7 +22,7 @@ export default class FormPage extends Component<
         this.showModalHandler = this.showModalHandler.bind(this)
         this.state = {
             formStatesArr: [],
-            modalIsVisible: true,
+            modalIsVisible: false,
         }
     }
 
@@ -57,7 +57,7 @@ export default class FormPage extends Component<
                         <Modal onClose={this.hideModalHandler}>
                             <NewCardForm
                                 handleFormState={this.handleFormState}
-                                // onClose={this.hideModalHandler}
+                                onClose={this.hideModalHandler}
                             />
                         </Modal>
                     )}

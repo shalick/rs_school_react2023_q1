@@ -12,7 +12,7 @@ import classes from './NewCardForm.module.css'
 
 export interface INewCardFormProps {
     handleFormState: (state: IFormData) => void
-    // onClose: () => void
+    onClose: () => void
 }
 
 export interface INewCardFormState {
@@ -55,6 +55,7 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
     resetForm() {
         this.formRef.common.current?.reset()
         this.setState({ isButtonDisabled: false })
+        this.props.onClose()
     }
 
     async handleSubmit(e: React.FormEvent) {

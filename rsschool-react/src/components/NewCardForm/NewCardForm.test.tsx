@@ -4,7 +4,7 @@ import NewCardForm from './NewCardForm'
 
 describe('Form component works', () => {
     it('render form', () => {
-        render(<NewCardForm handleFormState={() => []} />)
+        render(<NewCardForm handleFormState={() => []} onClose={() => false} />)
         expect(screen.getByRole('textbox')).toBeInTheDocument()
         expect(screen.getByRole('textbox')).toHaveValue('')
 
