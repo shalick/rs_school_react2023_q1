@@ -1,7 +1,6 @@
 import React from 'react'
 import { Component, createRef } from 'react'
 import { IFormData, INewCardFormRef } from '../../utils/types'
-import { fileReader } from '../../utils/fileReader'
 import MovieTitleText from '../forms/MovieTitleText'
 import ReleaseDate from '../forms/ReleaseDate'
 import CategorySelect from '../forms/CategorySelect'
@@ -18,6 +17,15 @@ export interface INewCardFormProps {
 
 export interface INewCardFormState {
     isButtonDisabled: boolean
+}
+
+export const fileReader = (blob: Blob) => {
+    if (!blob) return ''
+    return new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result)
+        reader.readAsDataURL(blob)
+    })
 }
 
 class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
