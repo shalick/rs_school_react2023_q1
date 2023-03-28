@@ -4,7 +4,7 @@ import { IFormData } from '../../utils/types'
 import FormCardList from '../../components/FormCardList/FormCardList'
 import Modal from '../Modal/Modal'
 
-// import styles from './FormPage.module.scss'
+import classes from './Form.module.css'
 
 export interface IFormPageState {
     formStatesArr: IFormData[] | []
@@ -42,12 +42,9 @@ export default class FormPage extends Component<
 
     render() {
         return (
-            <div>
-                {/* <Link to="/create-card" className={classes.button}>
-                    New Card
-                </Link> */}
+            <div className={classes.formContainer}>
                 <button
-                    // className={classes.button}
+                    className={classes.button}
                     onClick={this.showModalHandler}
                 >
                     New Card

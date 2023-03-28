@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+.choisesContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+} 
+
+.choise {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    color: #28262c;
+}

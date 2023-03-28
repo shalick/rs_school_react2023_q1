@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { IFormData } from '../../utils/types'
 import { FormCard } from '../FormCard/FormCard'
 
-// import styles from './FormCardList.module.scss'
+import classes from './FormCardList.module.css'
 
 export interface IFormCardListProps {
     statesArr: IFormData[]
@@ -27,6 +27,10 @@ export default class FormCardList extends Component<IFormCardListProps> {
     }
 
     render() {
-        return <ul data-testid="form-card-list">{this.generateCards()}</ul>
+        return (
+            <ul className={classes.cardsContainer} data-testid="form-card-list">
+                {this.generateCards()}
+            </ul>
+        )
     }
 }
