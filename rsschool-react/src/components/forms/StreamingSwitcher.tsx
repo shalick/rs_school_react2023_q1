@@ -11,22 +11,22 @@ export default class StreamingSwitcher extends Component<IStreamingSwitcherProps
         return (
             <div>
                 <input
-                    id="None"
+                    id="Yes"
                     name="streaming"
                     type="radio"
-                    value="None"
+                    value="Yes"
                     ref={forwardRef}
                 />
-                <label htmlFor="None">None</label>
+                <label htmlFor="Yes">Yes</label>
                 <input
-                    id="Netflix"
+                    id="No"
                     name="streaming"
                     type="radio"
-                    value="Netflix"
+                    value="No"
                     ref={forwardRef}
                 />
-                <label htmlFor="Netflix">Netflix</label>
-                <input
+                <label htmlFor="No">No</label>
+                {/* <input
                     id="Disney+"
                     name="streaming"
                     type="radio"
@@ -57,7 +57,7 @@ export default class StreamingSwitcher extends Component<IStreamingSwitcherProps
                     value="Others"
                     ref={forwardRef}
                 />
-                <label htmlFor="Others">Others</label>
+                <label htmlFor="Others">Others</label> */}
             </div>
         )
     }

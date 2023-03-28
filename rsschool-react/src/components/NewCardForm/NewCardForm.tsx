@@ -12,7 +12,8 @@ import SubmitButton from '../forms/SubmitButton'
 import classes from './NewCardForm.module.css'
 
 export interface INewCardFormProps {
-    setFormState: (state: IFormData) => void
+    handleFormState: (state: IFormData) => void
+    // onClose: () => void
 }
 
 export interface INewCardFormState {
@@ -45,6 +46,7 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
 
     resetForm() {
         this.formRef.common.current?.reset()
+        this.setState({ isButtonDisabled: false })
     }
 
     async handleSubmit(e: React.FormEvent) {
@@ -60,13 +62,13 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
         const title = titleRef.current?.value || ''
         const date = dateRef.current?.value || ''
         const category = categoryRef.current?.value || ''
-        const streaming = streamingRef.current?.checked ? 'Neflix' : 'Apple TV'
+        const streaming = streamingRef.current?.checked ? 'yes' : 'no'
         const watched = watchedRef.current?.checked || false
         let poster: string | null = null
         if (posterRef.current?.files) {
             poster = (await fileReader(posterRef.current?.files[0])) as string
         }
-        this.props.setFormState({
+        this.props.handleFormState({
             title,
             date,
             category,
@@ -75,11 +77,12 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
             poster,
         })
         this.resetForm()
-        this.setState({ isButtonDisabled: true })
     }
 
     render() {
         const { isButtonDisabled } = this.state
+        // const { onClose } = this.props
+        // const onClose = this.props.onClose
         const { title, date, category, streaming, watched, poster } =
             this.formRef
         return (
@@ -95,7 +98,10 @@ class NewCardForm extends Component<INewCardFormProps, INewCardFormState> {
                 <StreamingSwitcher forwardRef={streaming} />
                 <WatchedCheckbox forwardRef={watched} />
                 <PosterUpload forwardRef={poster} />
-                <SubmitButton isButtonDisabled={isButtonDisabled} />
+                <SubmitButton
+                    isButtonDisabled={isButtonDisabled}
+                    // onClose={onClose}
+                />
             </form>
         )
     }

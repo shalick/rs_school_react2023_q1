@@ -33,9 +33,6 @@ export class Header extends Component<HeaderProps> {
                         {/* <h2>{this.props.pageTitle}</h2> */}
                     </div>
                     <div>
-                        <Link to="/create-card" className={classes.button}>
-                            New Card
-                        </Link>
                         <NavBar />
                     </div>
                 </div>
