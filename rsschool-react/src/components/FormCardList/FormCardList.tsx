@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { FC } from 'react'
 import { IFormData } from '../../utils/types'
-import { FormCard } from '../FormCard/FormCard'
+import FormCard from '../FormCard/FormCard'
 
 import classes from './FormCardList.module.css'
 
@@ -8,13 +8,13 @@ export interface IFormCardListProps {
     statesArr: IFormData[]
 }
 
-export default class FormCardList extends Component<IFormCardListProps> {
-    generateCards() {
-        return this.props.statesArr.map((el: IFormData, idx: number) => {
+const FormCardList: FC<IFormCardListProps> = ({ statesArr }) => {
+    const generateCards = () => {
+        return statesArr.map((el: IFormData, idx: number) => {
             return (
                 <FormCard
                     key={idx}
-                    index={this.props.statesArr.length - idx}
+                    index={statesArr.length - idx}
                     poster={el.poster}
                     title={el.title}
                     date={el.date}
@@ -26,11 +26,12 @@ export default class FormCardList extends Component<IFormCardListProps> {
         }) as JSX.Element[]
     }
 
-    render() {
-        return (
-            <ul className={classes.cardsContainer} data-testid="form-card-list">
-                {this.generateCards()}
-            </ul>
-        )
-    }
+
+    return (
+        <ul className={classes.cardsContainer} data-testid="form-card-list">
+            {generateCards()}
+        </ul>
+    )
 }
+
+export default FormCardList
