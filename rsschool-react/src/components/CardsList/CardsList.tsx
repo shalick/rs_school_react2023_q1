@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Component } from 'react'
 import { IMovieCard } from '../../utils/types'
 import { MovieCard } from '../MovieCard/MovieCard'
@@ -9,17 +9,14 @@ interface IProps {
     movies: IMovieCard[]
 }
 
-export class CardsList extends Component<IProps> {
-    state: { cards: IMovieCard[] }
-    constructor(props: IProps) {
-        super(props)
-        this.state = { cards: this.props.movies }
-    }
+export const CardsList = (props: IProps) => {
+    const [movieCards, setMovieCards] = useState(props.movies);
+    useEffect(() => setMovieCards(props.movies), [])
 
-    render = () => (
+    return (
         <>
             <ul className={classes.moviesContainer}>
-                {this.state.cards.map(
+                {movieCards.map(
                     ({
                         id,
                         poster,
@@ -53,3 +50,5 @@ export class CardsList extends Component<IProps> {
         </>
     )
 }
+
+// export default CardsList
