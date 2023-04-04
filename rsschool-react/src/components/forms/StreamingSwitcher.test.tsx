@@ -1,22 +1,49 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import StreamingSwitcher from './StreamingSwitcher'
+import { vi } from 'vitest'
 
-describe('Time checkbox', () => {
-    let radio: HTMLInputElement[]
-    const setup = () => {
-        const ref = { current: {} } as React.RefObject<HTMLInputElement>
-        // render(<StreamingSwitcher forwardRef={ref} />)
+const message = 'error_message'
+const func = vi.fn()
+const data = {
+    name: 'streaming',
+    options: ['Yes', 'No'],
+    register: {
+        validate: func,
+    },
+}
+
+describe('StreamingSwitcher component', () => {
+    it('render switcher without error', () => {
+        render(
+            <StreamingSwitcher data={data} register={func} clearErrors={func} />
+        )
         expect(screen.getAllByRole('radio')).toHaveLength(2)
-        radio = screen.getAllByRole('radio')
         screen
             .getAllByRole('radio')
             .forEach((el) => expect(el).not.toBeChecked())
-    }
+    })
 
-    it('should render component', () => {
-        setup()
-        expect(radio[0]).toBeInTheDocument()
-        expect(radio[1]).toBeInTheDocument()
+    it('render switcher with error', () => {
+        render(
+            <StreamingSwitcher
+                data={data}
+                error={message}
+                register={func}
+                clearErrors={func}
+            />
+        )
+        expect(screen.getByText(message)).toBeInTheDocument()
+    })
+
+    it('switcher works', () => {
+        render(
+            <StreamingSwitcher data={data} register={func} clearErrors={func} />
+        )
+        const [toggle1, toggle2] = screen.getAllByRole('radio')
+        fireEvent.click(toggle1)
+        expect(toggle1).toBeChecked()
+        expect(toggle2).not.toBeChecked()
+        fireEvent.click(toggle2)
+        expect(toggle2).toBeChecked()
     })
 })

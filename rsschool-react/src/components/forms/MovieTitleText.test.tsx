@@ -1,25 +1,47 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import MovieTitleText from './MovieTitleText'
+import { vi } from 'vitest'
 
-describe('Movie title input', () => {
-    let input: HTMLInputElement
+const message = 'error_message'
+const func = vi.fn()
+const data = {
+    name: 'title',
+    label: 'Movie title',
+    register: {
+        validate: func,
+    },
+}
 
-    const setup = () => {
-        const ref = { current: {} } as React.RefObject<HTMLInputElement>
-        render(<MovieTitleText forwardRef={ref} />)
-        input = screen.getByRole('textbox', { name: /Movie Title/i })
-    }
-
-    it('should render component', () => {
-        setup()
-        expect(input).toBeInTheDocument()
+describe('MovieTitleText component', () => {
+    it('render textfield without error', () => {
+        render(
+            <MovieTitleText data={data} register={func} clearErrors={func} />
+        )
+        expect(screen.getByRole('textbox')).toBeInTheDocument()
+        expect(screen.getByRole('textbox')).toHaveValue('')
     })
 
-    it('should input focus', () => {
-        setup()
-        expect(input).not.toHaveFocus()
-        input.focus()
-        expect(input).toHaveFocus()
+    it('render textfield with error', () => {
+        render(
+            <MovieTitleText
+                data={data}
+                error={message}
+                register={func}
+                clearErrors={func}
+            />
+        )
+        expect(screen.getByText(message)).toBeInTheDocument()
+    })
+
+    it('textfield works', () => {
+        render(
+            <MovieTitleText data={data} register={func} clearErrors={func} />
+        )
+        const input = screen.getByRole('textbox')
+        const text = 'test text'
+        fireEvent.change(input, { target: { value: text } })
+        expect(input).toHaveValue(text)
+        expect(input).toHaveDisplayValue(text)
     })
 })

@@ -12,7 +12,7 @@ describe('Search component', () => {
 
     it('search string restore from local storage', () => {
         const testValue = 'new test'
-        localStorage.setItem('searchStr', testValue)
+        localStorage.setItem('inputValue', testValue)
         render(<Search />)
         expect(screen.getByRole('searchbox')).toHaveValue(testValue)
     })

@@ -1,18 +1,64 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import CategorySelect from './CategorySelect'
+import { vi } from 'vitest'
 
-describe('Delivery select', () => {
-    let select: HTMLSelectElement
+const message = 'error_message'
+const func = vi.fn()
+const data = {
+    name: 'category',
+    label: 'Category',
+    options: [
+        '',
+        'Action',
+        'Drama',
+        'Romance',
+        'Animation',
+        'Comedy',
+        'Crime',
+        'Thriller',
+    ],
+    register: {
+        validate: func,
+    },
+}
 
-    const setup = () => {
-        const ref = { current: {} } as React.RefObject<HTMLSelectElement>
-        render(<CategorySelect forwardRef={ref} />)
-        select = screen.getByRole('combobox')
-    }
+describe('CategorySelect component', () => {
+    it('render select without error', () => {
+        render(
+            <CategorySelect data={data} register={func} clearErrors={func} />
+        )
+        expect(screen.getByRole('combobox')).toBeInTheDocument()
+        expect(screen.getByRole('combobox')).toHaveValue('')
+        const options = screen.getAllByRole('option')
+        expect(options).toHaveLength(8)
+        expect(options[0]).toBeDisabled()
+    })
 
-    it('should render component', () => {
-        setup()
-        expect(select).toBeInTheDocument()
+    it('render select with error', () => {
+        render(
+            <CategorySelect
+                data={data}
+                error={message}
+                register={func}
+                clearErrors={func}
+            />
+        )
+        expect(screen.getByText(message)).toBeInTheDocument()
+    })
+
+    it('select works', () => {
+        render(
+            <CategorySelect data={data} register={func} clearErrors={func} />
+        )
+        const select = screen.getByRole('combobox', { name: 'Category' })
+        const options = screen.getAllByRole('option')
+        expect(select).toHaveValue('')
+        fireEvent.change(select, { target: { value: 'Action' } })
+        expect(select).toHaveValue(data.options[1])
+        expect(select).toHaveTextContent(data.options[1])
+        fireEvent.change(select, { target: { value: 'Drama' } })
+        expect(select).toHaveValue(data.options[2])
+        expect(select).toHaveTextContent(data.options[2])
     })
 })
