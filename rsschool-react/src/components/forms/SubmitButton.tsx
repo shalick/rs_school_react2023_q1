@@ -1,27 +1,21 @@
-import React, { Component } from 'react'
 import classes from './SubmitButton.module.css'
 
-export interface ISubmitButtonProps {
-    isButtonDisabled: boolean
+interface Props {
+    isSaved: boolean
+    isDisabled: boolean
 }
 
-export default class SubmitButton extends Component<
-    ISubmitButtonProps,
-    Record<string, never>
-> {
-    render() {
-        const { isButtonDisabled } = this.props
-        return (
-            <div className={classes.submitButtonContainer}>
-                <button
-                    className={classes.button}
-                    type="submit"
-                    disabled={isButtonDisabled}
-                    data-testid="submit-button"
-                >
-                    Submit Movie Card
-                </button>
-            </div>
-        )
-    }
-}
+const SubmitButton = ({ isSaved, isDisabled }: Props) => (
+    <label className={classes.submitButtonContainer} htmlFor="submit">
+        <input
+            className={classes.button}
+            name="submit"
+            type="submit"
+            disabled={isDisabled}
+            data-testid="submit-button"
+        />
+        {isSaved ? <span>Card successfully saved</span> : null}
+    </label>
+)
+
+export default SubmitButton

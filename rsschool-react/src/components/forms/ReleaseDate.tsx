@@ -1,23 +1,21 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Component } from 'react'
+import { INewCardFormInputProps } from '../../utils/types'
 
-export interface IReleaseDateInputProps {
-    forwardRef: React.RefObject<HTMLInputElement>
-}
+const ReleaseDate = ({
+    data,
+    register,
+    error,
+    clearErrors,
+}: INewCardFormInputProps) => (
+    <label className="form_field">
+        {data.label}
+        <input
+            className="form_date"
+            type="date"
+            {...register(data.name, { ...data.register })}
+            onInput={clearErrors}
+        />
+        <span className="form_error">{error}</span>
+    </label>
+)
 
-export default class ReleaseDate extends Component<IReleaseDateInputProps> {
-    render() {
-        const { forwardRef } = this.props
-        return (
-            <label>
-                Release date
-                <input
-                    name="date"
-                    type="date"
-                    ref={forwardRef}
-                    data-testid="date-input"
-                />
-            </label>
-        )
-    }
-}
+export default ReleaseDate

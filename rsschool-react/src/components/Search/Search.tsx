@@ -1,51 +1,35 @@
 import React from 'react'
-import { Component } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import classes from './Search.module.css'
 
-export class Search extends Component {
-    state: { searchStr: string }
-    constructor(props: Record<string, never>) {
-        super(props)
-        this.state = { searchStr: '' }
-    }
+export const Search = () => {
+    const savedInputValue = useRef(localStorage.getItem('inputValue') || '')
+    const [inputValue, setInputValue] = useState(savedInputValue.current)
 
-    componentDidMount() {
-        const value = localStorage.getItem('searchStr')
-        if (value) {
-            this.setState({ searchStr: value })
+    useEffect(() => {
+        return () => {
+            localStorage.setItem('inputValue', savedInputValue.current)
         }
-        window.addEventListener('beforeunload', this.handleBeforeUnload)
-    }
+    }, [])
 
-    componentWillUnmount = () => {
-        window.removeEventListener('beforeunload', this.handleBeforeUnload)
-        localStorage.setItem('searchStr', this.state.searchStr)
-    }
+    useEffect(() => {
+        savedInputValue.current = inputValue
+    }, [inputValue])
 
-    handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({ searchStr: event.target.value })
-    }
-
-    handleBeforeUnload = () => {
-        localStorage.setItem('searchStr', this.state.searchStr)
-    }
-
-    render() {
-        return (
-            <div className={classes.searchBox}>
-                <input
-                    type="search"
-                    id="search"
-                    className={classes.search}
-                    placeholder="Search movie"
-                    autoFocus
-                    value={this.state.searchStr || ''}
-                    onChange={this.handleInputChange}
-                />
-                <label htmlFor="search" className={classes.searchLabel}>
-                    Search
-                </label>
-            </div>
-        )
-    }
+    return (
+        <div className={classes.searchBox}>
+            <input
+                type="search"
+                id="search"
+                className={classes.search}
+                placeholder="Search movie"
+                autoFocus
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+            />
+            <label htmlFor="search" className={classes.searchLabel}>
+                Search
+            </label>
+        </div>
+    )
 }

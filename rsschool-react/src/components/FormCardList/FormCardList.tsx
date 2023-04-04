@@ -1,16 +1,16 @@
 import React, { FC } from 'react'
-import { IFormData } from '../../utils/types'
+import { ICardGen, IFormData } from '../../utils/types'
 import FormCard from '../FormCard/FormCard'
 
 import classes from './FormCardList.module.css'
 
 export interface IFormCardListProps {
-    statesArr: IFormData[]
+    statesArr: ICardGen[]
 }
 
 const FormCardList: FC<IFormCardListProps> = ({ statesArr }) => {
     const generateCards = () => {
-        return statesArr.map((el: IFormData, idx: number) => {
+        return statesArr.map((el: ICardGen, idx: number) => {
             return (
                 <FormCard
                     key={idx}
@@ -20,7 +20,7 @@ const FormCardList: FC<IFormCardListProps> = ({ statesArr }) => {
                     date={el.date}
                     category={el.category}
                     streaming={el.streaming}
-                    watched={el.watched}
+                    watched={true}
                 />
             )
         }) as JSX.Element[]

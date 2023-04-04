@@ -1,3 +1,4 @@
+import { UseFormRegister } from 'react-hook-form'
 export interface IMovieCard {
     id: number
     poster: string
@@ -37,11 +38,19 @@ export interface IFormData {
     poster: string | null
 }
 
+export interface IFormDataValues {
+    [x: string]: string | boolean | FileList
+    title: string
+    date: string
+    category: string
+    streaming: string
+    watched: boolean
+    poster: FileList
+}
+
 export interface INewCardFormErrors {
     [x: string]: string | undefined
 }
-
-// export interface INewCardFormProps {}
 
 export interface INewCardFormRef {
     common: React.RefObject<HTMLFormElement>
@@ -53,7 +62,31 @@ export interface INewCardFormRef {
     poster: React.RefObject<HTMLInputElement>
 }
 
+type ValidateFunction =
+    | ((x: string | null) => boolean)
+    | ((x: boolean) => boolean)
+    | ((x: FileList | null) => boolean)
+
+export interface FormField {
+    name: string
+    label?: string
+    options?: string[]
+    register: {
+        validate: Partial<ValidateFunction>
+    }
+}
+
 export interface INewCardFormInputProps {
-    message?: string
-    setError: (x: string) => void
+    data: FormField
+    error?: string
+    register: UseFormRegister<IFormDataValues>
+    clearErrors: () => void
+}
+
+export interface ICardGen {
+    title: string
+    date: string
+    category: string
+    streaming: string
+    poster: string
 }

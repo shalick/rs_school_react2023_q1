@@ -1,40 +1,42 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Component } from 'react'
-import classes from './StreamingSwitcher.module.css'
+import { INewCardFormInputProps } from '../../utils/types'
 
-export interface IStreamingSwitcherProps {
-    forwardRef: React.RefObject<HTMLInputElement>
-}
+const StreamingSwitcher = ({
+    data,
+    register,
+    error,
+    clearErrors,
+}: INewCardFormInputProps) => (
+    <div className="form_radiogroup">
+        <input
+            className="form_gender"
+            type="radio"
+            id={data.options ? data.options[0] : ''}
+            value={data.options ? data.options[0] : ''}
+            {...register(data.name, { ...data.register })}
+            onInput={clearErrors}
+        />
+        <label
+            className="form_field"
+            htmlFor={data.options ? data.options[0] : ''}
+        >
+            {data.options ? data.options[0] : ''}
+        </label>
+        <input
+            className="form_gender"
+            type="radio"
+            id={data.options ? data.options[1] : ''}
+            value={data.options ? data.options[1] : ''}
+            {...register(data.name, { ...data.register })}
+            onInput={clearErrors}
+        />
+        <label
+            className="form_field"
+            htmlFor={data.options ? data.options[1] : ''}
+        >
+            {data.options ? data.options[1] : ''}
+        </label>
+        <span className="form_error">{error}</span>
+    </div>
+)
 
-export default class StreamingSwitcher extends Component<IStreamingSwitcherProps> {
-    render() {
-        const { forwardRef } = this.props
-        return (
-            <div className={classes.container}>
-                <label>Streaming</label>
-                <div className={classes.choisesContainer}>
-                    <div className={classes.choise}>
-                        <label htmlFor="Yes">Yes</label>
-                        <input
-                            id="Yes"
-                            name="streaming"
-                            type="radio"
-                            value="Yes"
-                            ref={forwardRef}
-                        />
-                    </div>
-                    <div className={classes.choise}>
-                        <label htmlFor="No">No</label>
-                        <input
-                            id="No"
-                            name="streaming"
-                            type="radio"
-                            value="No"
-                            ref={forwardRef}
-                        />
-                    </div>
-                </div>
-            </div>
-        )
-    }
-}
+export default StreamingSwitcher

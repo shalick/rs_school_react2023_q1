@@ -6,7 +6,7 @@ describe('Time checkbox', () => {
     let radio: HTMLInputElement[]
     const setup = () => {
         const ref = { current: {} } as React.RefObject<HTMLInputElement>
-        render(<StreamingSwitcher forwardRef={ref} />)
+        // render(<StreamingSwitcher forwardRef={ref} />)
         expect(screen.getAllByRole('radio')).toHaveLength(2)
         radio = screen.getAllByRole('radio')
         screen
