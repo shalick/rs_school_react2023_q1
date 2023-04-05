@@ -2,7 +2,13 @@ import React, { FC } from 'react'
 import { IFormCard } from '../../utils/types'
 import classes from './FormCard.module.css'
 
-const FormCard: FC<IFormCard> = ({ poster, title, date, category, streaming }) => {
+const FormCard: FC<IFormCard> = ({
+    poster,
+    title,
+    date,
+    category,
+    streaming,
+}) => {
     return (
         <li className={classes.movie}>
             <img src={poster as string} alt="poster"></img>

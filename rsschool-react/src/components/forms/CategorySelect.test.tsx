@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import CategorySelect from './CategorySelect'
 import { vi } from 'vitest'
@@ -52,7 +52,6 @@ describe('CategorySelect component', () => {
             <CategorySelect data={data} register={func} clearErrors={func} />
         )
         const select = screen.getByRole('combobox', { name: 'Category' })
-        const options = screen.getAllByRole('option')
         expect(select).toHaveValue('')
         fireEvent.change(select, { target: { value: 'Action' } })
         expect(select).toHaveValue(data.options[1])

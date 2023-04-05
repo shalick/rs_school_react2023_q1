@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Component } from 'react'
 import { IMovieCard } from '../../utils/types'
 import { MovieCard } from '../MovieCard/MovieCard'
-import NewCard from '../NewCardForm/NewCardForm'
 import classes from './CardsList.module.css'
 
 interface IProps {
@@ -10,7 +8,7 @@ interface IProps {
 }
 
 export const CardsList = (props: IProps) => {
-    const [movieCards, setMovieCards] = useState(props.movies);
+    const [movieCards, setMovieCards] = useState(props.movies)
     useEffect(() => setMovieCards(props.movies), [])
 
     return (
@@ -50,5 +48,3 @@ export const CardsList = (props: IProps) => {
         </>
     )
 }
-
-// export default CardsList

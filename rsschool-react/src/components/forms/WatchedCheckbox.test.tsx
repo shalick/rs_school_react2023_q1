@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope */
+import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import WatchedCheckbox from './WatchedCheckbox'
 import { vi } from 'vitest'

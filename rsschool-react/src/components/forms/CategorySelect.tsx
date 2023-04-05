@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import { INewCardFormInputProps } from '../../utils/types'
 
 const CategorySelect = ({

@@ -1,3 +1,4 @@
+import React from 'react'
 import { INewCardFormInputProps } from '../../utils/types'
 
 const MovieTitleText = ({

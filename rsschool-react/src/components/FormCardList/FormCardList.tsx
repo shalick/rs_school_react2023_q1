@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { ICardGen, IFormData } from '../../utils/types'
+import { ICardGen } from '../../utils/types'
 import FormCard from '../FormCard/FormCard'
 
 import classes from './FormCardList.module.css'
@@ -25,7 +25,6 @@ const FormCardList: FC<IFormCardListProps> = ({ statesArr }) => {
             )
         }) as JSX.Element[]
     }
-
 
     return (
         <ul className={classes.cardsContainer} data-testid="form-card-list">

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import NewCardForm from '../../components/NewCardForm/NewCardForm'
 import { ICardGen } from '../../utils/types'
 import FormCardList from '../../components/FormCardList/FormCardList'

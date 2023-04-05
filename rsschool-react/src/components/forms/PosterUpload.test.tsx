@@ -1,3 +1,4 @@
+import React from 'react'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import PosterUpload from './PosterUpload'
 import { vi } from 'vitest'
@@ -32,7 +33,7 @@ describe('Poster uploader component', () => {
         expect(screen.getByText(message)).toBeInTheDocument()
     })
     it('should upload file with input file', async () => {
-        render(<PosterUpload data={data} register={func} clearErrors={func} />);
+        render(<PosterUpload data={data} register={func} clearErrors={func} />)
         const file = new File(['(⌐□_□)'], 'test.png', { type: 'image/png' })
         const posterInput = screen.getByLabelText<HTMLInputElement>(data.label)
         await waitFor(() =>
