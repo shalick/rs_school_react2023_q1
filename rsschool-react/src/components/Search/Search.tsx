@@ -1,20 +1,25 @@
 import React from 'react'
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import classes from './Search.module.css'
 
-export const Search = () => {
-    const savedInputValue = useRef(localStorage.getItem('inputValue') || '')
-    const [inputValue, setInputValue] = useState(savedInputValue.current)
+interface Props {
+    searchMovie: string
+    setSearchWord: (value: string) => void
+}
+
+export const Search = ({ searchMovie, setSearchWord }: Props) => {
+    const [currentInput, setCurrentInput] = useState(searchMovie)
 
     useEffect(() => {
-        return () => {
-            localStorage.setItem('inputValue', savedInputValue.current)
-        }
-    }, [])
+        window.localStorage.setItem('searchMovie', currentInput)
+    }, [currentInput])
 
-    useEffect(() => {
-        savedInputValue.current = inputValue
-    }, [inputValue])
+    const handleKeyUp = useCallback(
+        ({ key }) => {
+            if (key === 'Enter') setSearchWord(currentInput)
+        },
+        [setSearchWord, currentInput]
+    )
 
     return (
         <div className={classes.searchBox}>
@@ -24,8 +29,9 @@ export const Search = () => {
                 className={classes.search}
                 placeholder="Search movie"
                 autoFocus
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={currentInput || ''}
+                onChange={({ target: { value } }) => setCurrentInput(value)}
+                onKeyUp={handleKeyUp}
             />
             <label htmlFor="search" className={classes.searchLabel}>
                 Search
