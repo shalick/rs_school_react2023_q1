@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { IMovieCard } from '../../utils/types'
 import MovieCard from '../MovieCard/MovieCard'
 import classes from './CardsList.module.css'
 import {
@@ -9,10 +8,6 @@ import {
 } from '../../api/rickandmortyapi'
 import ModalMovieCard from '../ModalMovieCard/ModalMovieCard'
 import Preloader from '../Preloader/Preloader'
-
-interface IProps {
-    movies: IMovieCard[]
-}
 
 interface Props {
     searchWord: string
