@@ -7,6 +7,7 @@ import {
     IFilteredCharacter,
     createRequest,
 } from '../../api/rickandmortyapi'
+import ModalMovieCard from '../ModalMovieCard/ModalMovieCard'
 
 interface IProps {
     movies: IMovieCard[]
@@ -56,6 +57,14 @@ export const CardsList = ({ searchWord }: Props) => {
 
     return (
         <>
+            <ModalMovieCard
+                show={modal}
+                data={data.props}
+                handleClose={hideModal}
+            />
+            {!data.results && !isPending && (
+                <h3 data-testid="not-found">{message}</h3>
+            )}
             <ul className={classes.moviesContainer}>
                 {!isPending &&
                     data.results?.map((item) => (
