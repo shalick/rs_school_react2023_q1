@@ -5,7 +5,7 @@ export const Loader = () => {
     const loadingMsg = 'Loading ...'
 
     return (
-        <div className={classes.wrapper}>
+        <div className={classes.wrapper} data-testid="loader">
             <span className={classes.loader}></span>
             <h2 className={classes.heading}>{loadingMsg}</h2>
         </div>
