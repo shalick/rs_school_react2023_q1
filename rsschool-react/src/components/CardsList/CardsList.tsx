@@ -1,49 +1,70 @@
 import React, { useEffect, useState } from 'react'
 import { IMovieCard } from '../../utils/types'
-import { MovieCard } from '../MovieCard/MovieCard'
+import MovieCard from '../MovieCard/MovieCard'
 import classes from './CardsList.module.css'
+import {
+    ICharacter,
+    IFilteredCharacter,
+    createRequest,
+} from '../../api/rickandmortyapi'
 
 interface IProps {
     movies: IMovieCard[]
 }
 
-export const CardsList = (props: IProps) => {
-    const [movieCards, setMovieCards] = useState(props.movies)
-    useEffect(() => setMovieCards(props.movies), [])
+interface Props {
+    searchWord: string
+}
+
+interface Data extends Partial<IFilteredCharacter> {
+    props?: ICharacter
+}
+
+export const CardsList = ({ searchWord }: Props) => {
+    const [isPending, setIsPending] = useState(true)
+    const [data, setData] = useState<Data>({})
+    const [modal, setModal] = useState(false)
+    const [message, setMessage] = useState('')
+
+    const hideModal = () => setModal(false)
+    const showModal = (props: ICharacter) => {
+        setData((prev) => ({ ...prev, props }))
+        setModal(true)
+    }
+
+    useEffect(() => {
+        setIsPending(true)
+
+        const onRequestData = (data: IFilteredCharacter) => {
+            setData((prev) => ({ ...prev, ...data }))
+        }
+        const onError = (error: string) => {
+            setData((prev) => ({ ...prev, results: undefined }))
+            setMessage(error)
+        }
+        const onRequestEnd = () => {
+            setIsPending(false)
+        }
+
+        createRequest({
+            query: searchWord,
+            onRequestData,
+            onError,
+            onRequestEnd,
+        })
+    }, [searchWord])
 
     return (
         <>
             <ul className={classes.moviesContainer}>
-                {movieCards.map(
-                    ({
-                        id,
-                        poster,
-                        name,
-                        year,
-                        runtime,
-                        categories,
-                        release_date,
-                        director,
-                        writer,
-                        actors,
-                        storyline,
-                    }) => (
+                {!isPending &&
+                    data.results?.map((item) => (
                         <MovieCard
-                            key={id}
-                            id={id}
-                            poster={poster}
-                            name={name}
-                            year={year}
-                            runtime={runtime}
-                            categories={categories}
-                            release_date={release_date}
-                            director={director}
-                            writer={writer}
-                            actors={actors}
-                            storyline={storyline}
+                            key={item.id + item.name}
+                            data={item}
+                            handleModal={() => showModal(item)}
                         />
-                    )
-                )}
+                    ))}
             </ul>
         </>
     )

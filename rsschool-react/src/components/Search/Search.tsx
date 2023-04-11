@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { KeyboardEvent } from 'react'
 import { useState, useEffect, useCallback } from 'react'
 import classes from './Search.module.css'
 
@@ -15,8 +15,8 @@ export const Search = ({ searchMovie, setSearchWord }: Props) => {
     }, [currentInput])
 
     const handleKeyUp = useCallback(
-        ({ key }) => {
-            if (key === 'Enter') setSearchWord(currentInput)
+        (e: KeyboardEvent<HTMLInputElement>) => {
+            if (e.key === 'Enter') setSearchWord(currentInput)
         },
         [setSearchWord, currentInput]
     )
