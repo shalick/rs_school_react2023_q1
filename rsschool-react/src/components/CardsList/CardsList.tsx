@@ -8,6 +8,7 @@ import {
     createRequest,
 } from '../../api/rickandmortyapi'
 import ModalMovieCard from '../ModalMovieCard/ModalMovieCard'
+import Preloader from '../Preloader/Preloader'
 
 interface IProps {
     movies: IMovieCard[]
@@ -62,6 +63,7 @@ export const CardsList = ({ searchWord }: Props) => {
                 data={data.props}
                 handleClose={hideModal}
             />
+            {isPending && <Preloader />}
             {!data.results && !isPending && (
                 <h3 data-testid="not-found">{message}</h3>
             )}
