@@ -4,7 +4,7 @@ import { Search } from '../Search/Search'
 
 const Main = () => {
     const [searchMovie, setSearchWord] = useState(
-        localStorage.getItem('searchWord') || ''
+        localStorage.getItem('searchMovie') || ''
     )
 
     return (
