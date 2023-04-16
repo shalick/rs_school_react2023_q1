@@ -11,7 +11,9 @@ export const Search = ({ searchMovie, setSearchWord }: Props) => {
     const [currentInput, setCurrentInput] = useState(searchMovie)
 
     useEffect(() => {
-        window.localStorage.setItem('searchMovie', currentInput)
+        return () => {
+            localStorage.setItem('searchMovie', currentInput)
+        }
     }, [currentInput])
 
     const handleKeyUp = useCallback(
