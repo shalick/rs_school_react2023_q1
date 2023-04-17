@@ -5,16 +5,15 @@ import Main from './components/pages/Main'
 import NotFound from './components/pages/NotFound'
 import About from './components/pages/About'
 import Form from './components/pages/Form'
-// import NewCardForm from './components/NewCardForm/NewCardForm'
+import MainCard from './components/pages/MainCard'
+import { Paths } from './utils/types'
 
 function App() {
     return (
         <div>
             <Routes>
-                <Route
-                    path="/"
-                    element={<Layout pageTitle="Main" page={<Main />} />}
-                />
+                <Route path={Paths.MAIN} element={<Main />}></Route>
+                <Route path={`${Paths.MAIN}:cardId`} element={<MainCard />} />
                 <Route
                     path="about"
                     element={<Layout pageTitle="About" page={<About />} />}

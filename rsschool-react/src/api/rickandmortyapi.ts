@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { CreateRequestConfig, IFilteredCharacter } from './types'
+
 export interface ICharacter {
     id: number
     name: string
@@ -36,20 +36,73 @@ export interface CreateRequestConfig {
     onRequestData: (data: IFilteredCharacter) => void
     onRequestEnd?: () => void
     onError: (error: string) => void
+    needAllData?: boolean
+}
+
+export type GetAllData = {
+    query: string
+    pages: number
+    data: IFilteredCharacter
+    onRequestData: (data: IFilteredCharacter) => void
+    onError: (error: string) => void
 }
 
 const BASE = 'https://rickandmortyapi.com/api/'
 
-const CHARACTER = `${BASE}character/`
+export const CHARACTER = `${BASE}character/`
+
+const getAllData = ({
+    query,
+    pages,
+    data,
+    onRequestData,
+    onError,
+}: GetAllData) => {
+    let results = [...data.results]
+    const urlArray = Array.from(
+        { length: pages - 1 },
+        (_, k) => `${query}&page=${k + 2}`
+    )
+
+    Promise.all(urlArray.map((item) => axios.get(item)))
+        .then((resolvedArray) =>
+            resolvedArray.forEach(
+                ({ data }) => (results = [...results, ...data.results])
+            )
+        )
+        .catch(() => onError('Wooops! Something went wrong'))
+        .then(() => onRequestData({ ...data, results }))
+        .catch(() => onError('Wooops! Something went wrong'))
+}
+
+export const getFilterUrl = ({
+    searchWord,
+    status,
+    gender,
+    species,
+}: {
+    [x: string]: string
+}) =>
+    `${CHARACTER}?name=${searchWord}&status=${status}&gender=${gender}&species=${species}`
 
 export const createRequest = (config: CreateRequestConfig) => {
     const { query, onRequestData, onError, onRequestEnd } = config
     axios
-        .request<IFilteredCharacter>({
+        .request({
             headers: { 'Content-type': 'application/json' },
             baseURL: `${CHARACTER}?name=${query.toLowerCase()}`,
         })
-        .then(({ data }) => onRequestData(data))
+        .then(({ data }) => {
+            data.info.next
+                ? getAllData({
+                      query,
+                      pages: data.info.pages,
+                      data,
+                      onRequestData,
+                      onError,
+                  })
+                : onRequestData(data)
+        })
         .catch(({ response }) => {
             if (response.status === 404) onError(response.data.error)
             else if (response.status >= 500)

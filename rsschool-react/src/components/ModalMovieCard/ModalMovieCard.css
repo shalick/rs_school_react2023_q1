@@ -7,9 +7,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.6);
+    /* background-color: rgba(0, 0, 0, 0.6); */
     transition: opacity 100ms;
-    z-index: 1;
+    background-color: transparent;
+    z-index: -1;
 }
 
 .modal-card_overlay.hide {

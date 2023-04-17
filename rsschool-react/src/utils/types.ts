@@ -1,4 +1,12 @@
 import { UseFormRegister } from 'react-hook-form'
+
+export enum Paths {
+    MAIN = '/',
+    ABOUT = 'about',
+    FORM = 'form',
+    NOT_FOUND = '*',
+}
+
 export interface IMovieCard {
     id: number
     poster: string
@@ -89,4 +97,18 @@ export interface ICardGen {
     category: string
     streaming: string
     poster: string
+}
+
+export interface MainPageInfo {
+    total: number
+    current: number
+    newPages: number
+    count: number
+}
+
+export type FilterValues = {
+    [x: string]: string
+    gender: string
+    status: string
+    species: string
 }

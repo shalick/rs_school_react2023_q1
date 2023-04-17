@@ -1,4 +1,4 @@
-import { ICardGen } from '../types'
+import { FilterValues, ICardGen, MainPageInfo } from '../types'
 import { ICharacter } from '../../api/rickandmortyapi'
 
 type ActionMap<M extends { [index: string]: unknown }> = {
@@ -11,6 +11,8 @@ type ActionMap<M extends { [index: string]: unknown }> = {
 export enum Actions {
     ADD_FORM_CARD = 'ADD_FORM_CARD',
     SET_MAIN_CARD = 'SET_MAIN_CARD',
+    SET_FILTER_CARD = 'SET_FILTER_CARD',
+    SET_MAIN_PAGE_INFO = 'SET_MAIN_PAGE_INFO',
 }
 
 type FormCardType = ICardGen
@@ -58,4 +60,45 @@ export const mainCardsReducer = (
     }
 }
 
-export type CollectedActions = FormCardActions | MainCardActions
+type FilterCardType = FilterValues
+
+export type FilterCardActions = {
+    type: Actions.SET_FILTER_CARD
+    payload: FilterCardType
+}
+
+export const filterCardsReducer = (
+    state: FilterCardType,
+    action: FilterCardActions
+) => {
+    switch (action.type) {
+        case Actions.SET_FILTER_CARD:
+            return action.payload
+        default:
+            return state
+    }
+}
+
+type MainPageInfoType = MainPageInfo
+
+export type MainPageInfoActions = {
+    type: Actions.SET_MAIN_PAGE_INFO
+    payload: Partial<MainPageInfoType>
+}
+
+export const mainPageInfoReducer = (
+    state: MainPageInfoType,
+    action: MainPageInfoActions
+) => {
+    switch (action.type) {
+        case Actions.SET_MAIN_PAGE_INFO:
+            return { ...state, ...action.payload }
+        default:
+            return state
+    }
+}
+export type CollectedActions =
+    | FormCardActions
+    | MainCardActions
+    | FilterCardActions
+    | MainPageInfoActions
