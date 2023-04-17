@@ -1,30 +1,38 @@
 import React, { createContext, Dispatch, FC, useReducer } from 'react'
 import {
-    SearchWordActions,
-    searchWordReducer,
+    formCardsReducer,
+    CollectedActions,
+    mainCardsReducer,
+    FormCardActions,
+    MainCardActions,
 } from '../../utils/reducers/appReducer'
+import { ICardGen } from '../../utils/types'
+import { ICharacter } from '../../api/rickandmortyapi'
 
 type InitialStateType = {
-    searchWord: string
+    formCards: ICardGen[]
+    mainCards: ICharacter[]
 }
 
 const initialState = {
-    searchWord: localStorage.getItem('searchWord') || '',
+    formCards: [],
+    mainCards: [],
 }
 
 const AppContext = createContext<{
     state: InitialStateType
-    dispatch: Dispatch<SearchWordActions>
+    dispatch: Dispatch<CollectedActions>
 }>({
     state: initialState,
     dispatch: () => null,
 })
 
 const mainReducer = (
-    { searchWord }: InitialStateType,
-    action: SearchWordActions
+    { formCards, mainCards }: InitialStateType,
+    action: CollectedActions
 ) => ({
-    searchWord: searchWordReducer(searchWord, action),
+    formCards: formCardsReducer(formCards, action as FormCardActions),
+    mainCards: mainCardsReducer(mainCards, action as MainCardActions),
 })
 
 type AppProvider = {

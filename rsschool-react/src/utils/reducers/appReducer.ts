@@ -1,30 +1,61 @@
+import { ICardGen } from '../types'
+import { ICharacter } from '../../api/rickandmortyapi'
+
 type ActionMap<M extends { [index: string]: unknown }> = {
-    [Key in keyof M]: M[Key] extends undefined
-        ? {
-              type: Key
-          }
-        : {
-              type: Key
-              payload: M[Key]
-          }
+    [Key in keyof M]: {
+        type: Key
+        payload: M[Key]
+    }
 }
 
 export enum Actions {
-    SET_WORD = 'SET_WORD',
+    ADD_FORM_CARD = 'ADD_FORM_CARD',
+    SET_MAIN_CARD = 'SET_MAIN_CARD',
 }
 
-type SearchWordPayload = {
-    [Actions.SET_WORD]: string
+type FormCardType = ICardGen
+
+type FormCardPayload = {
+    [Actions.ADD_FORM_CARD]: ICardGen
 }
 
-export type SearchWordActions =
-    ActionMap<SearchWordPayload>[keyof ActionMap<SearchWordPayload>]
+export type FormCardActions =
+    ActionMap<FormCardPayload>[keyof ActionMap<FormCardPayload>]
 
-export const searchWordReducer = (state: string, action: SearchWordActions) => {
+export const formCardsReducer = (
+    state: FormCardType[],
+    action: FormCardActions
+) => {
     switch (action.type) {
-        case Actions.SET_WORD:
-            return action.payload
+        case Actions.ADD_FORM_CARD: {
+            const { title, date, category, streaming, poster } = action.payload
+            return [...state, { title, date, category, streaming, poster }]
+        }
         default:
             return state
     }
 }
+
+type MainCardType = ICharacter[]
+
+type MainCardPayload = {
+    [Actions.SET_MAIN_CARD]: ICharacter[]
+}
+
+export type MainCardActions =
+    ActionMap<MainCardPayload>[keyof ActionMap<MainCardPayload>]
+
+export const mainCardsReducer = (
+    state: MainCardType,
+    action: MainCardActions
+) => {
+    switch (action.type) {
+        case Actions.SET_MAIN_CARD:
+            return action.payload
+
+        default:
+            return state
+    }
+}
+
+export type CollectedActions = FormCardActions | MainCardActions

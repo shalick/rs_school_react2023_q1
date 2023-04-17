@@ -12,7 +12,8 @@ import SubmitButton from '../forms/SubmitButton'
 import classes from './NewCardForm.module.css'
 
 export interface INewCardFormProps {
-    setCards: Dispatch<SetStateAction<ICardGen[]>>
+    // setCards: Dispatch<SetStateAction<ICardGen[]>>
+    setCards: (card: ICardGen) => void
 }
 
 const NewCardForm: FC<INewCardFormProps> = ({ setCards }) => {
@@ -26,17 +27,25 @@ const NewCardForm: FC<INewCardFormProps> = ({ setCards }) => {
     const onSubmit: SubmitHandler<IFormDataValues> = (data) => {
         const { title, date, category, streaming } = data
         const watched = Boolean(data.watched)
-        setCards((prev) => [
-            ...prev,
-            {
-                title: title,
-                date: date,
-                category: category,
-                streaming: streaming,
-                watched: watched,
-                poster: URL.createObjectURL(data.poster[0] as unknown as Blob),
-            },
-        ])
+        // setCards((prev) => [
+        //     ...prev,
+        //     {
+        //         title: title,
+        //         date: date,
+        //         category: category,
+        //         streaming: streaming,
+        //         watched: watched,
+        //         poster: URL.createObjectURL(data.poster[0] as unknown as Blob),
+        //     },
+        // ])
+        setCards({
+            title: title,
+            date: date,
+            category: category,
+            streaming: streaming,
+            // watched: watched,
+            poster: URL.createObjectURL(data.poster[0] as unknown as Blob),
+        })
         reset()
     }
 
