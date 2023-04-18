@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
-// import NewCardForm from '../../components/NewCardForm/NewCardForm'
-// import { ICardGen } from '../../utils/types'
-// import FormCardList from '../../components/FormCardList/FormCardList'
+import NewCardForm from '../../components/NewCardForm/NewCardForm'
+import { ICardGen } from '../../utils/types'
+import FormCardList from '../../components/FormCardList/FormCardList'
 import Modal from '../Modal/Modal'
-// import { useAppSelector, useAppDispatch } from '../../hooks/redux'
-// import genCardsSlice from '../../store/reducers/GenCardsSlice'
+import { useAppSelector, useAppDispatch } from '../../hooks/redux'
+import { setFormStatesArr } from '../../store/reducers/FormCardsSlice'
 
 import classes from './Form.module.css'
 
 const FormPage = () => {
     const [modalIsVisible, setModalIsVisible] = useState(false)
-    // const { cards } = useAppSelector((state) => state.genCardsReducer)
-    // const { add } = genCardsSlice.actions
-    // const dispatch = useAppDispatch()
+    const { formStatesArr } = useAppSelector((state) => state.formCardsReducer)
+    const dispatch = useAppDispatch()
 
-    // const setCards = (card: ICardGen) => dispatch(add(card))
+    const setFormState = (newState: ICardGen) => {
+        dispatch(setFormStatesArr([newState, ...formStatesArr]))
+    }
 
     function hideModalHandler() {
         setModalIsVisible(false)
@@ -30,11 +31,11 @@ const FormPage = () => {
             <div data-testid="form-page">
                 {modalIsVisible && (
                     <Modal onClose={hideModalHandler}>
-                        {/* <NewCardForm setCards={setCards} /> */}
+                        <NewCardForm setFormState={setFormState} />
                     </Modal>
                 )}
             </div>
-            {/* <FormCardList statesArr={cards} /> */}
+            <FormCardList statesArr={formStatesArr} />
         </section>
     )
 }

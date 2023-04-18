@@ -1,10 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import genCardsReducer from './reducers/GenCardsSlice'
+import formCardsReducer from './reducers/FormCardsSlice'
 import mainCardsReducer from './reducers/MainCardsSlice'
 import filterMainCardsReducer from './reducers/FilterMainCardsSlice'
 
 const rootReducer = combineReducers({
-    genCardsReducer,
+    formCardsReducer,
     mainCardsReducer,
     filterMainCardsReducer,
 })

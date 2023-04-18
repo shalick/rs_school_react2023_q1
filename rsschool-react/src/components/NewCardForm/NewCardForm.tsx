@@ -13,10 +13,10 @@ import classes from './NewCardForm.module.css'
 
 export interface INewCardFormProps {
     // setCards: Dispatch<SetStateAction<ICardGen[]>>
-    setCards: (card: ICardGen) => void
+    setFormState: (card: ICardGen) => void
 }
 
-const NewCardForm: FC<INewCardFormProps> = ({ setCards }) => {
+const NewCardForm: FC<INewCardFormProps> = ({ setFormState }) => {
     const { register, formState, handleSubmit, reset, clearErrors } =
         useForm<IFormDataValues>({
             mode: 'onSubmit',
@@ -27,7 +27,7 @@ const NewCardForm: FC<INewCardFormProps> = ({ setCards }) => {
     const onSubmit: SubmitHandler<IFormDataValues> = (data) => {
         const { title, date, category, streaming } = data
         // const watched = Boolean(data.watched)
-        setCards({
+        setFormState({
             title: title,
             date: date,
             category: category,
