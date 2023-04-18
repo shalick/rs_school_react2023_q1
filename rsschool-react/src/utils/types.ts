@@ -99,16 +99,27 @@ export interface ICardGen {
     poster: string
 }
 
-export interface MainPageInfo {
-    total: number
-    current: number
-    newPages: number
-    count: number
-}
-
 export type FilterValues = {
     [x: string]: string
     gender: string
     status: string
     species: string
+}
+
+export type FormValues = {
+    [x: string]: string | boolean | FileList
+    agree: boolean
+    country: string
+    date: string
+    gender: string
+    fullName: string
+    image: FileList
+}
+
+export type FormInputProps = {
+    data: FormField
+    error?: string
+    register: UseFormRegister<FormValues> | UseFormRegister<FilterValues>
+    clearErrors?: () => void
+    setValue?: () => void
 }

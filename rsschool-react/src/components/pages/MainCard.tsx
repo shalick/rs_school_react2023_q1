@@ -1,16 +1,16 @@
-import { useCallback, useContext, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
+import { useAppSelector } from '../../hooks/redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import './MainCard.css'
-import { AppContext } from '../context/AppContext'
 import ModalMovieCard from '../ModalMovieCard/ModalMovieCard'
 import { Paths } from '../../utils/types'
 import './MainCard.css'
 
 const MainCard = () => {
     const { cardId } = useParams()
-    const { state } = useContext(AppContext)
+    const { cards } = useAppSelector((state) => state.mainCardsReducer)
     const navigate = useNavigate()
-    const [data] = state.mainCards.filter(({ id }) => id === Number(cardId))
+    const [data] = cards.filter(({ id }) => id === Number(cardId))
     const shouldRedirect = useRef(false)
     const navigateMain = useCallback(() => navigate(Paths.MAIN), [navigate])
 

@@ -1,27 +1,20 @@
-import React, { KeyboardEvent } from 'react'
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect, useState } from 'react'
+import { useAppSelector, useAppDispatch } from '../../hooks/redux'
+import { filterMainCardsSlice } from '../../store/reducers/FilterMainCardsSlice'
 import classes from './Search.module.css'
 
-interface Props {
-    searchMovie: string
-    setSearchWord: (value: string) => void
-}
+export const Search = () => {
+    const { searchWord } = useAppSelector(
+        (state) => state.filterMainCardsReducer
+    )
+    const { setSearchWord } = filterMainCardsSlice.actions
+    const dispatch = useAppDispatch()
 
-export const Search = ({ searchMovie, setSearchWord }: Props) => {
-    const [currentInput, setCurrentInput] = useState(searchMovie)
+    const [currentWord, setCurrentWord] = useState(searchWord)
 
     useEffect(() => {
-        return () => {
-            localStorage.setItem('searchMovie', currentInput)
-        }
-    }, [currentInput])
-
-    const handleKeyUp = useCallback(
-        (e: KeyboardEvent<HTMLInputElement>) => {
-            if (e.key === 'Enter') setSearchWord(currentInput)
-        },
-        [setSearchWord, currentInput]
-    )
+        dispatch(setSearchWord(currentWord))
+    }, [currentWord, dispatch, setSearchWord])
 
     return (
         <div className={classes.searchBox}>
@@ -31,9 +24,8 @@ export const Search = ({ searchMovie, setSearchWord }: Props) => {
                 className={classes.search}
                 placeholder="Search movie"
                 autoFocus
-                value={currentInput || ''}
-                onChange={({ target: { value } }) => setCurrentInput(value)}
-                onKeyUp={handleKeyUp}
+                value={currentWord || ''}
+                onChange={({ target: { value } }) => setCurrentWord(value)}
             />
             <label htmlFor="search" className={classes.searchLabel}>
                 Search

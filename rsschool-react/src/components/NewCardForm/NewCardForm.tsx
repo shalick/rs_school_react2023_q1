@@ -1,4 +1,4 @@
-import React, { FC, Dispatch, SetStateAction } from 'react'
+import { FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { ICardGen, IFormDataValues } from '../../utils/types'
 import { formFields } from '../../utils/formFields'
@@ -26,18 +26,7 @@ const NewCardForm: FC<INewCardFormProps> = ({ setCards }) => {
 
     const onSubmit: SubmitHandler<IFormDataValues> = (data) => {
         const { title, date, category, streaming } = data
-        const watched = Boolean(data.watched)
-        // setCards((prev) => [
-        //     ...prev,
-        //     {
-        //         title: title,
-        //         date: date,
-        //         category: category,
-        //         streaming: streaming,
-        //         watched: watched,
-        //         poster: URL.createObjectURL(data.poster[0] as unknown as Blob),
-        //     },
-        // ])
+        // const watched = Boolean(data.watched)
         setCards({
             title: title,
             date: date,

@@ -3,9 +3,7 @@ import { NavBar } from '../NavBar/NavBar'
 import Breadcrumbs from '../Breadcrumbs/Breadcrumbs'
 import classes from './Header.module.css'
 
-type HeaderProps = { pageTitle: string }
-
-export const Header = (props: HeaderProps) => (
+export const Header = () => (
     <header className={classes.header}>
         <div className={classes.container}>
             <div className={classes.headerContainer}>
@@ -28,13 +26,11 @@ export const Header = (props: HeaderProps) => (
                             <use xlinkHref="#movie-svgrepo-com"></use>
                         </svg>
                         <span>Movie App</span>
+                        <Breadcrumbs />
                     </Link>
-                    <h2 role="page-title">{props.pageTitle}</h2>
-                    {/* <h2>{this.props.pageTitle}</h2> */}
                 </div>
                 <div>
                     <NavBar />
-                    <Breadcrumbs />
                 </div>
             </div>
         </div>

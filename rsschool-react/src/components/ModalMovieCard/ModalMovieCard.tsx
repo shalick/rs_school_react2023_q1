@@ -1,4 +1,3 @@
-import { MouseEvent } from 'react'
 import { ICharacter } from '../../api/rickandmortyapi'
 import './ModalMovieCard.css'
 
