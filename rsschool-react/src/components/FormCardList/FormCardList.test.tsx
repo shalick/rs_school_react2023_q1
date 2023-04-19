@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen, within } from '@testing-library/react'
 import FormCardList from './FormCardList'
-import { IFormData } from '../../utils/types'
+import { ICardGen } from '../../utils/types'
 
 export const mockValidForm = () => {
     return {
@@ -15,10 +15,10 @@ export const mockValidForm = () => {
 }
 
 describe('Form card list', () => {
-    const singleRequest = mockValidForm() as IFormData
-    const multipleRequest = new Array(3).fill(singleRequest) as IFormData[]
+    const singleRequest = mockValidForm() as ICardGen
+    const multipleRequest = new Array(3).fill(singleRequest) as ICardGen[]
     let list: HTMLElement
-    let statesArr: IFormData[] = [singleRequest]
+    let statesArr: ICardGen[] = [singleRequest]
 
     const setup = () => {
         render(<FormCardList statesArr={statesArr} />)

@@ -1,12 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import NewCardForm from './NewCardForm'
+import './mockForm'
 import { vi } from 'vitest'
 
 const setter = vi.fn()
 describe('Form component works', () => {
     it('render form', () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         expect(screen.getByRole('textbox')).toBeInTheDocument()
         expect(screen.getByRole('textbox')).toHaveValue('')
 
@@ -32,12 +33,12 @@ describe('Form component works', () => {
         expect(screen.getByRole('button')).toBeInTheDocument()
     })
     it('submit button should be disabled', () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         expect(screen.getByRole('button')).toBeDisabled()
     })
 
     it('submit button not to be disabled after 1st input', () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         const input = screen.getByRole('textbox')
         const title = 'test title'
         fireEvent.change(input, { target: { value: title } })
@@ -45,7 +46,7 @@ describe('Form component works', () => {
     })
 
     it('submit button should be disabled with unfulfilled form', async () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         const input = screen.getByRole('textbox')
         const title = 'test title'
         fireEvent.change(input, { target: { value: title } })
@@ -54,7 +55,7 @@ describe('Form component works', () => {
     })
 
     it('should render errors of incorrect fields', async () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         const input = screen.getByRole('textbox')
         const title = 'test title'
         fireEvent.change(input, { target: { value: title } })
@@ -77,7 +78,7 @@ describe('Form component works', () => {
     })
 
     it('form submit correctly', async () => {
-        render(<NewCardForm setCards={setter} />)
+        render(<NewCardForm setFormState={setter} />)
         fireEvent.change(screen.getByRole('textbox'), {
             target: { value: 'test title' },
         })

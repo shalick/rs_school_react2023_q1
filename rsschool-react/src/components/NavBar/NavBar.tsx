@@ -1,16 +1,16 @@
 import React from 'react'
-import { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import './NavBar.css'
 
-export class NavBar extends Component {
-    render = () => (
+export const NavBar = () => {
+    return (
         <nav className="headerNav">
             <NavLink
                 className={({ isActive }) =>
                     `headerLink ${isActive ? 'activeLink' : ''}`
                 }
                 to="/"
+                data-testid="main-link"
             >
                 Main
             </NavLink>
@@ -18,17 +18,19 @@ export class NavBar extends Component {
                 className={({ isActive }) =>
                     `headerLink ${isActive ? 'activeLink' : ''}`
                 }
-                to="about"
+                to="Form"
+                data-testid="form-link"
             >
-                About
+                Form
             </NavLink>
             <NavLink
                 className={({ isActive }) =>
                     `headerLink ${isActive ? 'activeLink' : ''}`
                 }
-                to="Form"
+                to="about"
+                data-testid="about-link"
             >
-                Form
+                About
             </NavLink>
         </nav>
     )
