@@ -26,8 +26,8 @@ export const Header = () => (
                             <use xlinkHref="#movie-svgrepo-com"></use>
                         </svg>
                         <span>Movie App</span>
-                        <Breadcrumbs />
                     </Link>
+                    <Breadcrumbs />
                 </div>
                 <div>
                     <NavBar />
