@@ -9,7 +9,7 @@ import { hydrateRoot } from 'react-dom/client'
 const store = setupStore()
 
 hydrateRoot(
-    document.getElementById('root') as HTMLElement,
+    document.getElementById('app') as HTMLElement,
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>

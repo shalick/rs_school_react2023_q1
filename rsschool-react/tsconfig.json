@@ -17,6 +17,7 @@
         "jsx": "react-jsx",
         "useUnknownInCatchVariables": false
     },
-    "include": ["vite.config.ts", ".eslintrc.cjs", "src", "./setupTest.ts"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    // "include": ["vite.config.ts", ".eslintrc.cjs", "src", "./setupTest.ts"],
+    "references": [{ "path": "./tsconfig.node.json" }],
+    "ts-node": { "esm": true, "experimentalSpecifierResolution": "node" }
 }

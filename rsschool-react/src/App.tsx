@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Main from './components/pages/Main'
 import NotFound from './components/pages/NotFound'
 import About from './components/pages/About'
@@ -6,6 +6,7 @@ import Form from './components/pages/Form'
 import MainCard from './components/pages/MainCard'
 import { Paths } from './utils/types'
 import { Header } from './components/Header/Header'
+import './index.css'
 
 function App() {
     return (
@@ -23,10 +24,10 @@ function App() {
 
 function WrappedApp() {
     return (
-        <BrowserRouter>
+        <>
             <Header />
             <App />
-        </BrowserRouter>
+        </>
     )
 }
 
